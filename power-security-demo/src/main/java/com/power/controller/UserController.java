@@ -1,4 +1,5 @@
 package com.power.controller;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.power.dto.QueryUserDto;
@@ -38,9 +39,28 @@ public class UserController {
     @JsonView(User.UserSimpleView.class)
     public List<User> allUser1(@RequestParam(name = "query1", required = false) String query) {
         List<User> list = new ArrayList<>();
-        list.add(new User("zhangsan", "123456"));
-        list.add(new User("哭诉", "123456"));
-        list.add(new User("ss", "123456"));
+
+        User user1 = new User();
+        user1.setId("1");
+        user1.setUsername("张三");
+        user1.setPassword("123456");
+
+
+        User user2 = new User();
+        user2.setId("1");
+        user2.setUsername("张三");
+        user2.setPassword("123456");
+
+
+        User user3 = new User();
+        user3.setId("1");
+        user3.setUsername("张三");
+        user3.setPassword("123456");
+        
+        
+        list.add(user1);
+        list.add(user2);
+        list.add(user3);
         System.out.println(query);
 
         return list;
@@ -82,7 +102,19 @@ public class UserController {
 //    @RequestMapping(value = "allUser", method = RequestMethod.GET)
     public User getUserById1(@PathVariable(value = "userId") String userId) {
         System.out.println("userId = " + userId);
-        HashMap<String, String> map = new HashMap<>();
-        return new User("张三", "123456");
+        User user = new User();
+        user.setId("1");
+        user.setUsername("张三");
+        user.setPassword("123456");
+
+        return user;
+    }
+
+    @PostMapping
+    @JsonView(User.UserSimpleView.class)
+    public User create(@RequestBody User user) {
+        System.out.println(user);
+        user.setId("1");
+        return user;
     }
 }

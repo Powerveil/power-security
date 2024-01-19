@@ -13,6 +13,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.Date;
+
 /**
  * @author Powerveil
  * @Date 2024/1/19 16:59
@@ -73,14 +75,29 @@ public class UserTest {
     }
 
 
-
     @Test
     public void whenQuerySuccess4() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/user/a")
                         .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().is4xxClientError());
-                // 返回类型是集合，集合长度是3
+        // 返回类型是集合，集合长度是3
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("张三"));
     }
+
+    @Test
+    public void whenCreateSuccess() throws Exception {
+        Date date = new Date();
+        System.out.println(date.getTime());
+
+        String content = "{\"username\":\"张三\",\"password\":\"123456\",\"birthday\":\"" + date.getTime() + "\"}";
+        String contentAsString = mockMvc.perform(MockMvcRequestBuilders.post("/user")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(content))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("1"))
+                .andReturn().getResponse().getContentAsString();
+        System.out.println("contentAsString = " + contentAsString);
+    }
+
 
 }

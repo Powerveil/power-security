@@ -138,4 +138,9 @@ public class UserController {
         user.setId(userId);
         return user;
     }
+
+    @DeleteMapping(value = "/{userId}")
+    public void delete(@PathVariable(value = "userId") String userId) {
+        System.out.println("userId = " + userId);
+    }
 }

@@ -9,6 +9,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -120,6 +121,21 @@ public class UserController {
         }
         System.out.println(user);
         user.setId("1");
+        return user;
+    }
+
+
+    @PutMapping("/{userId}")
+    @JsonView(User.UserSimpleView.class)
+    public User update(@PathVariable(value = "userId") String userId, @Valid @RequestBody User user, BindingResult errors) {
+        if (errors.hasErrors()) {
+            FieldError fieldError = errors.getFieldError();
+            String field = fieldError.getField();
+            System.out.println(field);
+            errors.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
+        }
+        System.out.println(user);
+        user.setId(userId);
         return user;
     }
 }

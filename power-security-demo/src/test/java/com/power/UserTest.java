@@ -13,6 +13,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 /**
@@ -95,6 +97,19 @@ public class UserTest {
                         .content(content))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("1"))
+                .andReturn().getResponse().getContentAsString();
+        System.out.println("contentAsString = " + contentAsString);
+    }
+
+    @Test
+    public void whenUpdateSuccess() throws Exception {
+
+        Date date = new Date(LocalDateTime.now().plusYears(1).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+        String content = "{\"username\":\"张三\",\"password\":null,\"birthday\":\"" + date.getTime() + "\"}";
+        String contentAsString = mockMvc.perform(MockMvcRequestBuilders.put("/user/25")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(content))
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString();
         System.out.println("contentAsString = " + contentAsString);
     }

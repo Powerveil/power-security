@@ -8,8 +8,10 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -112,7 +114,10 @@ public class UserController {
 
     @PostMapping
     @JsonView(User.UserSimpleView.class)
-    public User create(@RequestBody User user) {
+    public User create(@Valid @RequestBody User user, BindingResult errors) {
+        if (errors.hasErrors()) {
+            errors.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
+        }
         System.out.println(user);
         user.setId("1");
         return user;

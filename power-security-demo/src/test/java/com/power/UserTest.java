@@ -89,7 +89,7 @@ public class UserTest {
         Date date = new Date();
         System.out.println(date.getTime());
 
-        String content = "{\"username\":\"张三\",\"password\":\"123456\",\"birthday\":\"" + date.getTime() + "\"}";
+        String content = "{\"username\":\"张三\",\"password\":null,\"birthday\":\"" + date.getTime() + "\"}";
         String contentAsString = mockMvc.perform(MockMvcRequestBuilders.post("/user")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(content))

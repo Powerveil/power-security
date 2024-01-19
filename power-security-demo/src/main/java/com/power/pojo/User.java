@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.Date;
 
@@ -23,6 +24,7 @@ public class User {
     @JsonView(UserSimpleView.class)
     private String username;
     @JsonView(UserDetailView.class)
+    @NotBlank
     private String password;
     @JsonView(UserSimpleView.class)
     private Date birthday;

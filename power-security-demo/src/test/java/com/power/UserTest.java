@@ -19,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserController {
+public class UserTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -33,17 +33,19 @@ public class UserController {
 
     @Test
     public void whenQuerySuccess1() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/user/allUser")
+        String contentAsString = mockMvc.perform(MockMvcRequestBuilders.get("/user/allUser1")
                         .param("query1", "你好")
                         .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 // 返回类型是集合，集合长度是3
-                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(3));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(3))
+                .andReturn().getResponse().getContentAsString();
+        System.out.println("contentAsString = " + contentAsString);
     }
 
     @Test
     public void whenQuerySuccess2() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/user/query")
+        String contentAsString = mockMvc.perform(MockMvcRequestBuilders.get("/user/query")
                         .param("username", "张三")
                         .param("phone", "17630825698")
                         .param("address", "河南")
@@ -53,7 +55,32 @@ public class UserController {
                         .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 // 返回类型是集合，集合长度是3
-                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(3));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(3))
+                .andReturn().getResponse().getContentAsString();
+        System.out.println("contentAsString = " + contentAsString);
+    }
+
+
+    @Test
+    public void whenQuerySuccess3() throws Exception {
+        String str = mockMvc.perform(MockMvcRequestBuilders.get("/user/1")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                // 返回类型是集合，集合长度是3
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("张三"))
+                .andReturn().getResponse().getContentAsString();
+        System.out.println("str = " + str);
+    }
+
+
+
+    @Test
+    public void whenQuerySuccess4() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/a")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+                // 返回类型是集合，集合长度是3
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("张三"));
     }
 
 }

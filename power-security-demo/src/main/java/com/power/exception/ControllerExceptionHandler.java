@@ -14,6 +14,7 @@ import java.util.Map;
  * @Date 2024/1/21 10:51
  */
 @ControllerAdvice
+// 异常处理器是在拦截器之前的，如果异常处理器处理掉了，拦截器的afterCompletion的入参exception为null
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(value = {UserNotFoundException.class})

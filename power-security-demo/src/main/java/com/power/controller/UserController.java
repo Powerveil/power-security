@@ -107,14 +107,16 @@ public class UserController {
     public User getUserById1(@PathVariable(value = "userId") String userId) {
 
 //        throw new RuntimeException("user not found");
-        throw new UserNotFoundException(userId);
-//        System.out.println("userId = " + userId);
-//        User user = new User();
-//        user.setId("1");
-//        user.setUsername("张三");
-//        user.setPassword("123456");
-//
-//        return user;
+//        throw new UserNotFoundException(userId);
+        System.out.println("进入getUserById1");
+
+        System.out.println("userId = " + userId);
+        User user = new User();
+        user.setId("1");
+        user.setUsername("张三");
+        user.setPassword("123456");
+
+        return user;
     }
 
     @PostMapping

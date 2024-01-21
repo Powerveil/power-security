@@ -3,6 +3,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.power.dto.QueryUserDto;
+import com.power.exception.UserNotFoundException;
 import com.power.pojo.User;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -104,21 +105,21 @@ public class UserController {
     @JsonView(User.UserDetailView.class)
 //    @RequestMapping(value = "allUser", method = RequestMethod.GET)
     public User getUserById1(@PathVariable(value = "userId") String userId) {
-        System.out.println("userId = " + userId);
-        User user = new User();
-        user.setId("1");
-        user.setUsername("张三");
-        user.setPassword("123456");
 
-        return user;
+//        throw new RuntimeException("user not found");
+        throw new UserNotFoundException(userId);
+//        System.out.println("userId = " + userId);
+//        User user = new User();
+//        user.setId("1");
+//        user.setUsername("张三");
+//        user.setPassword("123456");
+//
+//        return user;
     }
 
     @PostMapping
     @JsonView(User.UserSimpleView.class)
-    public User create(@Valid @RequestBody User user, BindingResult errors) {
-        if (errors.hasErrors()) {
-            errors.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
-        }
+    public User create(@Valid @RequestBody User user) {
         System.out.println(user);
         user.setId("1");
         return user;

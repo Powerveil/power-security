@@ -12,8 +12,8 @@ import java.util.Date;
  * @author Powerveil
  * @Date 2024/1/21 16:55
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 // 可以拿到请求方法和请求参数，但是拿不到http的请求和响应
 public class TimeAspect {
 

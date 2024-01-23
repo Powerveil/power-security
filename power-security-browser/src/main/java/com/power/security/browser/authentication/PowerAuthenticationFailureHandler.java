@@ -1,6 +1,7 @@
 package com.power.security.browser.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.power.security.browser.support.SimpleResponse;
 import com.power.security.core.properties.LoginType;
 import com.power.security.core.properties.SecurityProperties;
 import org.slf4j.Logger;
@@ -47,7 +48,7 @@ public class PowerAuthenticationFailureHandler extends SimpleUrlAuthenticationFa
         if (LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // 状态码为500
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(exception));
+            response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(exception.getMessage())));
         } else {
             super.onAuthenticationFailure(request, response, exception);
         }

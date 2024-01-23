@@ -12,5 +12,5 @@ power:
   security:
     browser:
 #      loginPage: /demo_signIn.html
-      loginType: REDIRECT
-#      loginType: JSON
+      #      loginType: REDIRECT
+      loginType: JSON

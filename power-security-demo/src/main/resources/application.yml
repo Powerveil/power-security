@@ -4,6 +4,6 @@ server:
 spring:
   session:
     store-type: none
-security:
-  basic:
-    enabled: false
+#security:
+#  basic:
+#    enabled: false # 是否开启

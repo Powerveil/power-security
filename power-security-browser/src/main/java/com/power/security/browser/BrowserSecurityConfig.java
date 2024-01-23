@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.annotation.Resource;
 
 /**
  * @author Powerveil
@@ -23,7 +22,6 @@ import javax.annotation.Resource;
 @Configurable
 @EnableWebSecurity
 public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
-    //    @Resource(name = "mySecurityProperties")
     @Autowired
     private SecurityProperties securityProperties;
 
@@ -38,6 +36,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
         ValidateCodeFilter validateCodeFilter = new ValidateCodeFilter();
         validateCodeFilter.setAuthenticationFailureHandler(powerAuthenticationFailureHandler);
+        validateCodeFilter.setSecurityProperties(securityProperties);
+        // 调用初始化方法
+        validateCodeFilter.afterPropertiesSet();
 //        http.cors().disable();
         http
                 .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)

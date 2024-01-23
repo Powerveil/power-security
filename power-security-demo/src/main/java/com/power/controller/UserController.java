@@ -9,6 +9,10 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +30,18 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
+
+    @GetMapping("/me")
+    // SpringMVC会自动的从SecurityContextHolder里去找
+//    public Object getCurrentUser(Authentication authentication) {
+////        return SecurityContextHolder.getContext().getAuthentication();
+//        return authentication;
+//    }
+    public Object getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
+        return userDetails;
+    }
+   
+     
     @GetMapping("/allUser0")
 //    @RequestMapping(value = "allUser", method = RequestMethod.GET)
     public List<String> allUser0(@RequestParam(name = "query1", required = false) String query) {

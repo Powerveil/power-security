@@ -1,5 +1,7 @@
 package com.power.security.browser;
 
+import com.power.security.browser.authentication.PowerAuthenticationFailureHandler;
+import com.power.security.browser.authentication.PowerAuthenticationSuccessHandler;
 import com.power.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -23,6 +25,12 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SecurityProperties securityProperties;
 
+    @Autowired
+    private PowerAuthenticationSuccessHandler powerAuthenticationSuccessHandler;
+
+    @Autowired
+    private PowerAuthenticationFailureHandler powerAuthenticationFailureHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -30,6 +38,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .loginPage("/authentication/require")
                 .loginProcessingUrl("/authentication/form")
+                .successHandler(powerAuthenticationSuccessHandler) // 登录成功处理器
+                .failureHandler(powerAuthenticationFailureHandler) // 登录失败处理器
 //        http.httpBasic()
                 .and()
                 .authorizeRequests()

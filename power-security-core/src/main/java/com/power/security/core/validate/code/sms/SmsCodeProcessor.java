@@ -12,7 +12,7 @@ import org.springframework.web.context.request.ServletWebRequest;
  * @author Powerveil
  * @Date 2024/1/24 14:10
  */
-@Component("smsCodeProcessor")
+@Component("smsValidateCodeProcessor")
 public class SmsCodeProcessor extends AbstractValidateCodeProcessor<ValidateCode> {
 
     /**

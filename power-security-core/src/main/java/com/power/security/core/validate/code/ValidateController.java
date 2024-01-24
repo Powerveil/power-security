@@ -24,9 +24,8 @@ import java.util.Map;
 @RestController
 public class ValidateController {
 
-    // 依赖搜索
     @Autowired
-    private Map<String, ValidateCodeProcessor> validateCodeProcessors;
+    private ValidateCodeProcessorHolder validateCodeProcessorHolder;
 
     /**
      * 创建验证码，根据验证码类型不同，调用不同的 {@link ValidateCodeProcessor}接口实现
@@ -38,7 +37,7 @@ public class ValidateController {
      */
     @GetMapping("/code/{type}")
     public void createCode(HttpServletRequest request, HttpServletResponse response, @PathVariable("type") String type) throws Exception {
-        validateCodeProcessors.get(type + "CodeProcessor").create(new ServletWebRequest(request, response));
+        validateCodeProcessorHolder.findValidateCodeProcessor(type).create(new ServletWebRequest(request, response));
     }
 
 }

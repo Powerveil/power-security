@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
  * @author Powerveil
  * @Date 2024/1/24 14:18
  */
-@Component("imageCodeProcessor")
+@Component("imageValidateCodeProcessor")
 public class ImageCodeProcessor extends AbstractValidateCodeProcessor<ImageCode> {
     /**
      * 发送图形验证码，将其写到响应中

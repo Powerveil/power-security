@@ -1,6 +1,7 @@
 package com.power.security.core.validate.code;
 
 import com.power.security.core.properties.SecurityProperties;
+import com.power.security.core.validate.code.image.ImageCodeGenerator;
 import com.power.security.core.validate.code.sms.DefaultSmsCodeSender;
 import com.power.security.core.validate.code.sms.SmsCodeSender;
 import org.springframework.beans.factory.annotation.Autowired;

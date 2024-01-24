@@ -1,5 +1,6 @@
-package com.power.security.core.validate.code;
+package com.power.security.core.validate.code.image;
 
+import com.power.security.core.validate.code.ValidateCode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

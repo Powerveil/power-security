@@ -2,7 +2,9 @@ package com.power.security.browser;
 
 import com.power.security.browser.authentication.PowerAuthenticationFailureHandler;
 import com.power.security.browser.authentication.PowerAuthenticationSuccessHandler;
+import com.power.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.power.security.core.properties.SecurityProperties;
+import com.power.security.core.validate.code.SmsCodeFilter;
 import com.power.security.core.validate.code.ValidateCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -42,6 +44,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -64,8 +69,18 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         validateCodeFilter.setSecurityProperties(securityProperties);
         // 调用初始化方法
         validateCodeFilter.afterPropertiesSet();
+
+
+        SmsCodeFilter smsCodeFilter = new SmsCodeFilter();
+        smsCodeFilter.setAuthenticationFailureHandler(powerAuthenticationFailureHandler);
+        smsCodeFilter.setSecurityProperties(securityProperties);
+        // 调用初始化方法
+        smsCodeFilter.afterPropertiesSet();
+
+
 //        http.cors().disable();
         http
+                .addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin()
                 .loginPage("/authentication/require")
@@ -84,7 +99,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                         securityProperties.getBrowser().getLoginPage(),
                         "/code/*").permitAll()
                 .anyRequest().authenticated()
-                .and().csrf().disable();
+                .and().csrf().disable()
+                .apply(smsCodeAuthenticationSecurityConfig);
 //
 //        http.httpBasic().disable();
     }

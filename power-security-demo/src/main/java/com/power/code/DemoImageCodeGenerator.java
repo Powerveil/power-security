@@ -9,7 +9,7 @@ import org.springframework.web.context.request.ServletWebRequest;
  * @author Powerveil
  * @Date 2024/1/23 21:12
  */
-@Component("imageCodeGenerator")
+//@Component("imageCodeGenerator")
 public class DemoImageCodeGenerator implements ValidateCodeGenerator {
     @Override
     public ImageCode generate(ServletWebRequest request) {

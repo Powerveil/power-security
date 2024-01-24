@@ -12,4 +12,7 @@ public class BrowserProperties {
 
     private LoginType loginType = LoginType.JSON;
 
+    // 记住我Cookie的时间
+    private int rememberMeSeconds = 3600;
+
 }

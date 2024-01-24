@@ -1,5 +1,6 @@
 package com.power.security.core.authentication.mobile;
 
+import com.power.security.core.properties.SecurityConstants;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,7 +21,7 @@ public class SmsCodeAuthenticationFilter extends
     // ~ Static fields/initializers
     // =====================================================================================
 
-    public static final String POWER_FORM_MOBILE_KEY = "mobile";
+    public static final String POWER_FORM_MOBILE_KEY = SecurityConstants.DEFAULT_PARAMETER_NAME_MOBILE;
 
     private String mobileParameter = POWER_FORM_MOBILE_KEY;
     private boolean postOnly = true;

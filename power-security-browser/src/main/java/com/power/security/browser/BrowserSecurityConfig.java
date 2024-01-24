@@ -61,14 +61,18 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     protected void configure(HttpSecurity http) throws Exception {
 
         applyPasswordAuthenticationConfig(http);
-
+        // 验证码（图形验证码或短信验证码）校验配置
         http.apply(validateCodeSecurityConfig)
                 .and()
+                // 验证码认证过滤器
                 .apply(smsCodeAuthenticationSecurityConfig)
                 .and()
                 .rememberMe()
+                // 配置tokenRepository
                 .tokenRepository(persistentTokenRepository())
+                // 记住我时间
                 .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
+                // 配置用户信息服务
                 .userDetailsService(userDetailsService)
                 .and()
                 .authorizeRequests()

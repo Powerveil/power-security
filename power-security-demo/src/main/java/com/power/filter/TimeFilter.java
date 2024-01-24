@@ -1,11 +1,9 @@
 package com.power.filter;
 
 
-import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import java.io.IOException;
-import java.util.logging.LogRecord;
 
 /**
  * @author Powerveil

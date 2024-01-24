@@ -1,7 +1,6 @@
 package com.power.security.core.validate.code.sms;
 
 import com.power.security.core.validate.code.ValidateCode;
-import com.power.security.core.validate.code.ValidateCodeGenerator;
 import com.power.security.core.validate.code.impl.AbstractValidateCodeProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

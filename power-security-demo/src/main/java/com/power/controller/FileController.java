@@ -2,8 +2,6 @@ package com.power.controller;
 
 import com.power.dto.FileInfo;
 import org.apache.commons.io.IOUtils;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,7 +1,5 @@
 package com.power.security.browser;
 
-import com.power.security.browser.authentication.PowerAuthenticationFailureHandler;
-import com.power.security.browser.authentication.PowerAuthenticationSuccessHandler;
 import com.power.security.core.authentication.AbstractChannelSecurityConfig;
 import com.power.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.power.security.core.properties.SecurityConstants;

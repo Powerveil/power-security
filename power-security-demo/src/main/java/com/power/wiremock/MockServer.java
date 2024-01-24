@@ -1,6 +1,5 @@
 package com.power.wiremock;
 
-import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;

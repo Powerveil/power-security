@@ -1,8 +1,7 @@
 package com.power.code;
 
-import com.power.security.core.validate.ImageCode;
-import com.power.security.core.validate.ValidateCodeGenerator;
-import org.springframework.stereotype.Component;
+import com.power.security.core.validate.code.ImageCode;
+import com.power.security.core.validate.code.ValidateCodeGenerator;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**

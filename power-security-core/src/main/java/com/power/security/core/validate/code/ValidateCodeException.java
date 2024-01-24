@@ -1,4 +1,4 @@
-package com.power.security.core.validate;
+package com.power.security.core.validate.code;
 
 import org.springframework.security.core.AuthenticationException;
 

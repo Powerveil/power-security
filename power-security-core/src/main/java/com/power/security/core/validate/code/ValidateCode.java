@@ -1,4 +1,4 @@
-package com.power.security.core.validate;
+package com.power.security.core.validate.code;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,14 +14,12 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ImageCode {
-    public ImageCode(BufferedImage image, String code, int expireTime) {
-        this.image = image;
+public class ValidateCode {
+    public ValidateCode(String code, int expireTime) {
         this.code = code;
         this.expireTime = LocalDateTime.now().plusSeconds(expireTime);
     }
 
-    private BufferedImage image;
 
     private String code;
 

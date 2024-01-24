@@ -3,7 +3,7 @@ package com.power.security.browser;
 import com.power.security.browser.authentication.PowerAuthenticationFailureHandler;
 import com.power.security.browser.authentication.PowerAuthenticationSuccessHandler;
 import com.power.security.core.properties.SecurityProperties;
-import com.power.security.core.validate.ValidateCodeFilter;
+import com.power.security.core.validate.code.ValidateCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;

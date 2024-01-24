@@ -1,4 +1,4 @@
-package com.power.security.core.validate;
+package com.power.security.core.validate.code;
 
 import com.power.security.core.properties.SecurityProperties;
 import org.apache.commons.lang.StringUtils;

@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
 
@@ -41,6 +42,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     @Autowired
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
 
+    @Autowired
+    private SpringSocialConfigurer powerSocialSecurityConfig;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -64,6 +68,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                 .and()
                 // 验证码认证过滤器
                 .apply(smsCodeAuthenticationSecurityConfig)
+                .and()
+                // 往当前过滤器链上加一个过滤器，过滤器会拦截某些特定的请求。如果拦截到就引导用户做社交登录
+                .apply(powerSocialSecurityConfig)
                 .and()
                 .rememberMe()
                 // 配置tokenRepository

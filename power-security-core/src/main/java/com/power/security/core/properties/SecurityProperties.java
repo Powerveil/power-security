@@ -11,8 +11,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 //@Component(value = "mySecurityProperties")
 @ConfigurationProperties(prefix = "power.security")
 public class SecurityProperties {
-    BrowserProperties browser = new BrowserProperties();
+    private BrowserProperties browser = new BrowserProperties();
 
     private ValidateCodeProperties code = new ValidateCodeProperties();
+
+    private SocialProperties social = new SocialProperties();
 
 }

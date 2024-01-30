@@ -13,7 +13,7 @@ public class QQUserInfo {
      */
     private String ret; //
     /**
-     * 如果ret<0，会有相应的错误信息提示，返回数据全部用UTF-8编码。
+     //     * 如果ret<0，会有相应的错误信息提示，返回数据全部用UTF-8编码。
      */
     private String msg; //
     /**
